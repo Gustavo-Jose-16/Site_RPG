@@ -1,0 +1,1194 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    background:#050B0D;
+
+    color:#14FFB7;
+
+    font-family:'Share Tech Mono', monospace;
+
+}
+
+/* Barra superior */
+
+header{
+
+    height:75px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 50px;
+
+    border-bottom:2px solid #00F5A0;
+
+    background:#071014;
+
+}
+
+.logo{
+
+    font-size:28px;
+
+    font-family:'Orbitron';
+
+    font-weight:bold;
+
+}
+
+nav{
+
+    display:flex;
+
+    gap:30px;
+
+}
+
+nav a{
+
+    color:#14FFB7;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+nav a:hover{
+
+    color:white;
+
+    text-shadow:0 0 15px #00F5A0;
+
+}
+
+/* Hero */
+
+.hero{
+
+    height:420px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+}
+
+.hero h1{
+
+    font-size:55px;
+
+    font-family:'Orbitron';
+
+    margin-bottom:20px;
+
+}
+
+.hero p{
+
+    font-size:22px;
+
+    margin-bottom:40px;
+
+}
+
+.hero button{
+
+    width:220px;
+
+    height:60px;
+
+    background:transparent;
+
+    color:#00F5A0;
+
+    border:2px solid #00F5A0;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    transition:.3s;
+
+}
+
+.hero button:hover{
+
+    background:#00F5A0;
+
+    color:#000;
+
+    box-shadow:0 0 25px #00F5A0;
+
+}
+
+/* Dashboard */
+
+.dashboard{
+
+    width:90%;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:25px;
+
+}
+
+.card{
+
+    border:2px solid #00F5A0;
+
+    padding:35px;
+
+    border-radius:10px;
+
+    text-align:center;
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    box-shadow:0 0 25px #00F5A0;
+
+}
+
+.card h2{
+
+    margin-bottom:20px;
+
+}
+
+.card span{
+
+    font-size:45px;
+
+    font-family:'Orbitron';
+
+}
+/* =======================
+        MAPA ESTELAR
+======================= */
+
+.mapa{
+
+    width:90%;
+
+    margin:80px auto;
+
+}
+
+.titulo{
+
+    font-family:'Orbitron';
+
+    margin-bottom:30px;
+
+    font-size:35px;
+
+}
+
+#pesquisa,
+#pesquisaGrupo,
+#pesquisaMissao{
+
+    width:100%;
+
+    padding:18px;
+
+    margin-bottom:30px;
+
+    background:#071014;
+
+    border:2px solid #00F5A0;
+
+    color:white;
+
+    font-size:18px;
+
+    outline:none;
+
+}
+
+.lista-planetas{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:20px;
+
+}
+
+.planeta{
+
+    padding:25px;
+
+    border:2px solid #00F5A0;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    background:#081317;
+
+}
+
+.planeta:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 0 25px #00F5A0;
+
+}
+
+.planeta h3{
+
+    margin-bottom:15px;
+
+    color:#00F5A0;
+
+}
+
+.info-planeta{
+
+    margin-top:40px;
+
+    border:2px solid #00F5A0;
+
+    padding:30px;
+
+    border-radius:12px;
+
+    background:#081317;
+
+    min-height:220px;
+
+}
+
+.info-planeta h3{
+
+    margin-bottom:20px;
+
+    font-family:'Orbitron';
+
+}
+/*======================
+      MISSÕES
+=======================*/
+
+.missoes{
+
+    width:90%;
+    margin:80px auto;
+
+}
+
+.botao{
+
+    background:transparent;
+    color:#00F5A0;
+    border:2px solid #00F5A0;
+    padding:15px 25px;
+    cursor:pointer;
+    margin-bottom:25px;
+    transition:.3s;
+
+}
+
+.botao:hover{
+
+    background:#00F5A0;
+    color:black;
+    box-shadow:0 0 20px #00F5A0;
+
+}
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+
+}
+
+th{
+
+    background:#00F5A0;
+    color:black;
+    padding:15px;
+
+}
+
+td{
+
+    border:1px solid #00F5A0;
+    padding:15px;
+    text-align:center;
+
+}
+
+.status{
+
+    padding:6px 12px;
+    border-radius:20px;
+    font-weight:bold;
+
+}
+
+.ativa{
+
+    color:#00F5A0;
+
+}
+
+.andamento{
+
+    color:orange;
+
+}
+
+.concluida{
+
+    color:red;
+}
+
+.historico-missoes{
+
+    margin-top:40px;
+
+    border-top:2px solid #00F5A0;
+
+    padding-top:30px;
+
+}
+
+.lista-historico{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.item-historico{
+
+    display:grid;
+
+    grid-template-columns:2fr 2fr 1.5fr 1fr;
+
+    gap:15px;
+
+    align-items:center;
+
+    background:#081317;
+
+    border:2px solid #00F5A0;
+
+    border-radius:8px;
+
+    padding:14px 20px;
+
+    opacity:.75;
+
+}
+
+.nome-historico{
+
+    font-weight:bold;
+
+    color:#00F5A0;
+
+}
+
+/*======================
+      MODAL
+=======================*/
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,.8);
+
+    justify-content:center;
+    align-items:center;
+
+}
+
+.modal-conteudo{
+
+    width:420px;
+
+    background:#081317;
+
+    border:2px solid #00F5A0;
+
+    padding:30px;
+
+    border-radius:10px;
+
+}
+
+.modal-conteudo input,
+.modal-conteudo select{
+
+    width:100%;
+
+    padding:12px;
+
+    margin:15px 0;
+
+    background:#071014;
+
+    border:2px solid #00F5A0;
+
+    color:white;
+
+}
+/*========================
+        FROTA
+=========================*/
+
+.frota{
+
+    width:90%;
+
+    margin:80px auto;
+
+}
+
+.lista-grupos{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+    gap:25px;
+
+}
+
+.grupo{
+
+    background:#081317;
+
+    border:2px solid #00F5A0;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    transition:.3s;
+
+}
+
+.grupo:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 0 25px #00F5A0;
+
+}
+
+.grupo h3{
+
+    font-family:'Orbitron';
+
+    color:#00F5A0;
+
+    margin-bottom:15px;
+
+}
+
+.grupo p{
+
+    margin:8px 0;
+
+}
+
+.grupo ul{
+
+    margin-top:10px;
+
+    padding-left:20px;
+
+}
+
+.grupo li{
+
+    margin:5px 0;
+
+}
+
+.acoes{
+
+    margin-top:20px;
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+}
+
+.acoes button{
+
+    padding:8px 15px;
+
+    cursor:pointer;
+
+    border:none;
+
+    border-radius:6px;
+
+    background:#00F5A0;
+
+    color:#000;
+
+    font-weight:bold;
+
+}
+
+/* Botão-ícone padrão para editar/excluir
+   (usado em Missões, Grupos e Planetas) */
+
+.btn-icone{
+
+    background:#00F5A0;
+
+    color:#000;
+
+    border:none;
+
+    border-radius:6px;
+
+    padding:8px 12px;
+
+    margin-right:6px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:.2s;
+
+}
+
+.btn-icone:hover{
+
+    background:#00F5A0;
+
+}
+
+.btn-icone-excluir:hover{
+
+    background:#ff4d4d;
+
+}
+
+.acoes-frota{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    margin-bottom:30px;
+
+}
+
+.acoes-frota input{
+
+    flex:1;
+
+    min-width:220px;
+
+    padding:14px;
+
+    background:#071014;
+
+    border:2px solid #00F5A0;
+
+    color:white;
+
+    font-size:16px;
+
+    outline:none;
+
+}
+
+.tripulantes-livres{
+
+    margin-top:60px;
+
+    border-top:2px solid #00F5A0;
+
+    padding-top:40px;
+
+}
+
+.subtitulo{
+
+    font-family:'Orbitron';
+
+    font-size:24px;
+
+    color:#00F5A0;
+
+    margin-bottom:10px;
+
+}
+
+.descricao-livres{
+
+    margin-bottom:25px;
+
+    opacity:.8;
+
+}
+
+.lista-chips{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+}
+
+.chip{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    background:#081317;
+
+    border:2px solid #00F5A0;
+
+    border-radius:20px;
+
+    padding:8px 18px;
+
+}
+
+.chip button{
+
+    background:transparent;
+
+    border:none;
+
+    color:#ff4d4d;
+
+    font-weight:bold;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+/*==========================
+        FUNDO
+===========================*/
+
+.estrelas{
+
+    position:fixed;
+
+    width:100%;
+    height:100%;
+
+    left:0;
+    top:0;
+
+    z-index:-1;
+
+    background:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(#00F5A0 1px, transparent 1px);
+
+    background-size:70px 70px,120px 120px;
+
+    animation:moverEstrelas 60s linear infinite;
+
+}
+
+@keyframes moverEstrelas{
+
+    from{
+
+        background-position:0 0,0 0;
+
+    }
+
+    to{
+
+        background-position:0 1200px,0 800px;
+
+    }
+
+}
+
+/*==========================
+      PAINEL SUPERIOR
+===========================*/
+
+.painel-topo{
+
+    width:90%;
+
+    margin:40px auto;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr 1fr;
+
+    gap:30px;
+
+}
+
+.relogio,.energia,.data{
+
+    border:2px solid #00F5A0;
+
+    padding:25px;
+
+    border-radius:10px;
+
+    background:#081317;
+
+    text-align:center;
+
+}
+
+.relogio span,.data span{
+
+    font-size:40px;
+
+    font-family:'Orbitron';
+
+    color:#00F5A0;
+
+}
+
+.barra{
+
+    width:100%;
+
+    height:30px;
+
+    border:2px solid #00F5A0;
+
+    margin-top:20px;
+
+}
+
+#energia{
+
+    width:100%;
+
+    height:100%;
+
+    background:linear-gradient(90deg,#00F5A0,#00C8FF);
+
+    transition:.5s;
+
+}
+
+/*==========================
+       SCROLL
+===========================*/
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+/*==========================
+      ANIMAÇÃO CARDS
+===========================*/
+
+.card,
+.planeta,
+.grupo{
+
+    animation:aparecer .8s;
+
+}
+
+@keyframes aparecer{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+.titulo{
+
+    font-size:36px;
+
+    margin-bottom:30px;
+
+    font-family:'Orbitron';
+
+    color:#00F5A0;
+
+    text-shadow:
+
+    0 0 5px #00F5A0,
+
+    0 0 15px #00F5A0,
+
+    0 0 30px #00F5A0;
+
+}
+/*======================
+    LOADING
+=======================*/
+
+#loading{
+
+    position:fixed;
+
+    width:100%;
+
+    height:100%;
+
+    left:0;
+
+    top:0;
+
+    background:#050B0D;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+.loader{
+
+    width:90px;
+
+    height:90px;
+
+    margin-top:30px;
+
+    border:8px solid #14393d;
+
+    border-top:8px solid #00F5A0;
+
+    border-radius:50%;
+
+    animation:girar 1s linear infinite;
+
+}
+
+@keyframes girar{
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+#notificacao{
+
+    position:fixed;
+
+    right:20px;
+
+    bottom:20px;
+
+    background:#00F5A0;
+
+    color:#000;
+
+    padding:15px 25px;
+
+    border-radius:10px;
+
+    display:none;
+
+    font-weight:bold;
+
+    box-shadow:0 0 20px #00F5A0;
+
+}
+.toast{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#00F5A0;
+    color:#000;
+    padding:15px 25px;
+    border-radius:8px;
+    font-weight:bold;
+    opacity:0;
+    transition:.4s;
+    z-index:9999;
+}
+
+.toast.mostrar{
+    opacity:1;
+}
+body.temaClaro{
+
+    background:#F4F4F4;
+
+    color:#222;
+
+}
+
+body.temaClaro .estrelas{
+
+    display:none;
+
+}
+
+body.temaClaro .titulo,
+body.temaClaro .logo{
+
+    text-shadow:none;
+
+}
+
+body.temaClaro header{
+
+    background:#ffffff;
+
+    border-bottom:2px solid #00C48A;
+
+}
+
+body.temaClaro nav a{
+
+    color:#00875A;
+
+}
+
+body.temaClaro .card,
+body.temaClaro .grupo,
+body.temaClaro .planeta,
+body.temaClaro .relogio,
+body.temaClaro .energia,
+body.temaClaro .data,
+body.temaClaro .info-planeta,
+body.temaClaro .modal-conteudo,
+body.temaClaro .chip,
+body.temaClaro .item-historico{
+
+    background:white;
+
+    color:black;
+
+    border-color:#00C48A;
+
+}
+
+body.temaClaro #pesquisa,
+body.temaClaro #pesquisaGrupo,
+body.temaClaro #pesquisaMissao,
+body.temaClaro .acoes-frota input,
+body.temaClaro .modal-conteudo input,
+body.temaClaro .modal-conteudo select,
+body.temaClaro .modal-conteudo textarea{
+
+    background:#ffffff;
+
+    color:#222;
+
+    border:2px solid #00C48A;
+
+}
+
+body.temaClaro .nome-historico{
+
+    color:#00875A;
+
+}
+
+body.temaClaro .grupo h3,
+body.temaClaro .planeta h3{
+
+    color:#00875A;
+
+}
+
+body.temaClaro .btn-icone{
+
+    border:1px solid #00C48A;
+
+}
+#tema{
+
+    position:fixed;
+
+    top:15px;
+
+    right:20px;
+
+    z-index:10000;
+
+    background:#071014;
+
+    color:#00F5A0;
+
+    border:2px solid #00F5A0;
+
+    padding:10px 18px;
+
+    cursor:pointer;
+
+    font-family:'Share Tech Mono', monospace;
+
+    font-size:14px;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:opacity .4s;
+
+}
+
+#tema.visivel{
+
+    opacity:1;
+
+    pointer-events:auto;
+
+}
+
+.menu-mobile{
+
+    display:none;
+
+    background:transparent;
+
+    color:#00F5A0;
+
+    border:2px solid #00F5A0;
+
+    font-size:22px;
+
+    padding:5px 12px;
+
+    cursor:pointer;
+
+}
+
+@media(max-width:768px){
+
+nav{
+
+display:none;
+
+}
+
+nav.ativo{
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.menu-mobile{
+
+display:block;
+
+}
+
+}
+/*==========================
+          RODAPÉ
+===========================*/
+
+.rodape{
+
+    margin-top:60px;
+
+    padding:20px;
+
+    text-align:center;
+
+    border-top:2px solid #00F5A0;
+
+    background:#081317;
+
+}
+
+.rodape p{
+
+    color:#00F5A0;
+
+    font-family:'Orbitron', sans-serif;
+
+    margin:5px 0;
+
+    font-size:15px;
+
+}
+
+.rodape strong{
+
+    color:#ffffff;
+
+}

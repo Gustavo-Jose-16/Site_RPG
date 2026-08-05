@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Painel de Operações da Nave</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <button id="tema">🌙 Tema</button>
+
+    <div id="notificacao"></div>
+
+    <div id="loading">
+        <h1>Inicializando Sistema...</h1>
+        <div class="loader"></div>
+    </div>
+
+    <div class="estrelas"></div>
+
+    <header>
+        <div class="logo">🚀 PAINEL DA NAVE</div>
+
+        <nav>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#mapa">Mapa</a>
+            <a href="#missoes">Missões</a>
+            <a href="#frota">Frota</a>
+        </nav>
+
+        <button id="menuMobile" class="menu-mobile">☰</button>
+    </header>
+
+    <section class="painel-topo">
+        <div class="relogio">
+            <h3>HORÁRIO GALÁCTICO</h3>
+            <span id="relogioDigital">00:00:00</span>
+        </div>
+
+        <div class="energia">
+            <h3>ENERGIA DA NAVE</h3>
+            <div class="barra">
+                <div id="energia"></div>
+            </div>
+            <span id="energiaTexto">100%</span>
+        </div>
+
+        <div class="data">
+            <h3>DATA GALÁCTICA</h3>
+            <span id="dataAtual">--/--/----</span>
+        </div>
+    </section>
+
+    <section class="hero">
+        <h1>Painel de Operações</h1>
+        <p>Sistema Central de Controle da Frota Espacial</p>
+        <button id="btnIniciarSistema">Iniciar Sistema</button>
+    </section>
+
+    <section id="dashboard" class="dashboard">
+        <div class="card">
+            <h2>Temperatura</h2>
+            <span id="temperatura">0°C</span>
+        </div>
+        <div class="card">
+            <h2>Comunicação</h2>
+            <span id="comunicacao">ONLINE</span>
+        </div>
+        <div class="card">
+            <h2>Planetas</h2>
+            <span id="planetas">0</span>
+        </div>
+        <div class="card">
+            <h2>Missões</h2>
+            <span id="missoesTotal">0</span>
+        </div>
+        <div class="card">
+            <h2>Grupos</h2>
+            <span id="grupos">0</span>
+        </div>
+        <div class="card">
+            <h2>Tripulantes</h2>
+            <span id="tripulantes">0</span>
+        </div>
+    </section>
+
+    <section id="mapa" class="mapa">
+        <h2 class="titulo">🌌 MAPA ESTELAR</h2>
+
+        <input type="text" id="pesquisa" placeholder="Pesquisar planeta...">
+
+        <button id="btnNovoPlaneta" class="botao">+ Novo Planeta</button>
+
+        <div id="listaPlanetas" class="lista-planetas"></div>
+
+        <div id="informacoes" class="info-planeta">
+            <h3>Selecione um planeta</h3>
+            <p>As informações aparecerão aqui.</p>
+        </div>
+    </section>
+
+    <div id="modalPlaneta" class="modal">
+        <div class="modal-conteudo">
+            <h2>Cadastro de Planeta</h2>
+            <input id="nomePlaneta" placeholder="Nome do Planeta">
+            <input id="setorPlaneta" placeholder="Setor">
+            <input id="recursosPlaneta" placeholder="Recursos">
+            <select id="riscoPlaneta">
+                <option>Baixo</option>
+                <option>Médio</option>
+                <option>Alto</option>
+            </select>
+            <textarea id="descricaoPlaneta" placeholder="Descrição"></textarea>
+            <button id="salvarPlaneta" class="botao">Salvar Planeta</button>
+        </div>
+    </div>
+
+    <section id="missoes" class="missoes">
+        <h2 class="titulo">🚀 REGISTRO DE MISSÕES</h2>
+
+        <input type="text" id="pesquisaMissao" placeholder="Pesquisar missão...">
+
+        <button id="btnNovaMissao" class="botao">+ Nova Missão</button>
+
+        <canvas id="grafico" width="500" height="300"></canvas>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Missão</th>
+                    <th>Destino</th>
+                    <th>Responsável</th>
+                    <th>Prioridade</th>
+                    <th>Status</th>
+                    <th>Data</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaMissoes"></tbody>
+        </table>
+
+        <div class="historico-missoes">
+            <h3 class="subtitulo">📜 Histórico de Missões Concluídas</h3>
+            <div id="listaHistorico" class="lista-historico"></div>
+        </div>
+    </section>
+
+    <div id="modalMissao" class="modal">
+        <div class="modal-conteudo">
+            <h2>Nova Missão</h2>
+            <input id="nomeMissao" placeholder="Nome da missão">
+            <input id="destinoMissao" placeholder="Destino">
+            <input id="responsavelMissao" placeholder="Responsável">
+            <input id="dataMissao" type="date">
+            <select id="prioridadeMissao">
+                <option>Baixa</option>
+                <option>Média</option>
+                <option>Alta</option>
+            </select>
+            <select id="statusMissao">
+                <option>Ativa</option>
+                <option>Em andamento</option>
+                <option>Concluída</option>
+            </select>
+            <button id="salvarMissao" class="botao">Salvar</button>
+        </div>
+    </div>
+
+    <section id="frota" class="frota">
+        <h2 class="titulo">👨‍🚀 FROTA ESPACIAL</h2>
+
+        <div class="acoes-frota">
+            <input id="pesquisaGrupo" type="text" placeholder="Pesquisar grupo...">
+            <button id="btnNovoGrupo" class="botao">+ Novo Grupo</button>
+        </div>
+
+        <div id="listaGrupos" class="lista-grupos"></div>
+
+        <div class="tripulantes-livres">
+            <h3 class="subtitulo">🧑‍🚀 Tripulantes Livres</h3>
+            <p class="descricao-livres">Tripulantes que ainda não fazem parte de nenhum grupo.</p>
+
+            <div class="acoes-frota">
+                <input id="nomeTripulanteLivre" type="text" placeholder="Nome do tripulante">
+                <button id="btnAddTripulanteLivre" class="botao">+ Adicionar</button>
+            </div>
+
+            <div id="listaTripulantesLivres" class="lista-chips"></div>
+        </div>
+    </section>
+
+    <div id="modalGrupo" class="modal">
+        <div class="modal-conteudo">
+            <h2>Cadastro de Grupo</h2>
+            <input id="nomeGrupo" placeholder="Nome do Grupo">
+            <input id="capitaoGrupo" placeholder="Capitão">
+            <input id="especialidadeGrupo" placeholder="Especialidade">
+            <select id="nivelGrupo">
+                <option>Iniciante</option>
+                <option>Intermediário</option>
+                <option>Elite</option>
+            </select>
+            <textarea id="integrantesGrupo" placeholder="Digite os integrantes separados por vírgula"></textarea>
+            <button id="salvarGrupo" class="botao">Salvar Grupo</button>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+<footer class="rodape">
+
+    <p>© 2026 Painel de Operações da Nave</p>
+
+    <p>Desenvolvido por <strong>GustavoJ</strong></p>
+
+</footer>
+</html>
