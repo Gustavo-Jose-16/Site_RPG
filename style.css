@@ -1974,3 +1974,113 @@ body.temaClaro .tripulante-livre-card h4{
     color:#00875A;
 
 }
+/*==================================
+            RODAPÉ
+===================================*/
+
+.footer{
+
+    margin-top:80px;
+
+    background:#081317;
+
+    border-top:2px solid #00F5A0;
+
+}
+
+.footer-container{
+
+    width:90%;
+
+    margin:auto;
+
+    padding:40px 0;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    flex-wrap:wrap;
+
+    gap:30px;
+
+}
+
+.footer h2,
+.footer h3{
+
+    color:#00F5A0;
+
+    margin-bottom:15px;
+
+    font-family:'Orbitron', sans-serif;
+
+}
+
+.footer p{
+
+    color:#b8c7c9;
+
+    line-height:1.8;
+
+}
+
+.footer-links{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.footer-links a{
+
+    color:#b8c7c9;
+
+    text-decoration:none;
+
+    margin:5px 0;
+
+    transition:.3s;
+
+}
+
+.footer-links a:hover{
+
+    color:#00F5A0;
+
+    padding-left:5px;
+
+}
+
+.footer-copy{
+
+    border-top:1px solid rgba(255,255,255,.1);
+
+    text-align:center;
+
+    padding:20px;
+
+    color:#9ca3af;
+
+    font-size:14px;
+
+}
+
+.footer-copy strong{
+
+    color:#00F5A0;
+
+}
+
+@media(max-width:768px){
+
+    .footer-container{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+}
