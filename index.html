@@ -151,6 +151,7 @@
                     <th>Missão</th>
                     <th>Destino</th>
                     <th>Responsável</th>
+                    <th>Concluído por</th>
                     <th>Prioridade</th>
                     <th>Status</th>
                     <th>Data</th>
@@ -162,7 +163,7 @@
 
         <div class="historico-missoes">
             <div class="historico-cabecalho">
-                <h3 class="subtitulo">📜 Histórico de Missões Concluídas</h3>
+                <h3 class="subtitulo">📜 Última Missão Concluída</h3>
                 <a href="historico.html" class="link-historico">Ver histórico completo e ranking →</a>
             </div>
             <div id="listaHistorico" class="lista-historico"></div>
@@ -194,6 +195,7 @@
         <div class="modal-conteudo">
             <h2>✅ Concluir Missão</h2>
             <p class="texto-concluir">Missão: <strong id="nomeMissaoConcluir"></strong></p>
+            <p class="texto-concluir-obs">O responsável (quem mandou a missão) não muda. Informe abaixo apenas quem efetivamente concluiu.</p>
             <input id="responsavelConcluirMissao" placeholder="Quem concluiu — separe por vírgula se for mais de uma pessoa">
             <button id="confirmarConcluirMissao" class="botao">Confirmar Conclusão</button>
         </div>
@@ -224,9 +226,16 @@
 
         <div id="listaGrupos" class="lista-grupos"></div>
 
+        <div class="integrantes-grupos">
+            <h3 class="subtitulo">👥 Tripulação em Grupos</h3>
+            <p class="descricao-livres">Todos os integrantes que já fazem parte de algum grupo.</p>
+
+            <div id="listaIntegrantesGrupos" class="lista-integrantes-grupos"></div>
+        </div>
+
         <div class="tripulantes-livres">
-            <h3 class="subtitulo">🧑‍🚀 Tripulantes </h3>
-            <p class="descricao-livres">Todos os Tripulantes da Nave.</p>
+            <h3 class="subtitulo">🧑‍🚀 Tripulantes Livres</h3>
+            <p class="descricao-livres">Tripulantes que ainda não fazem parte de nenhum grupo.</p>
 
             <div class="acoes-frota">
                 <input id="nomeTripulanteLivre" type="text" placeholder="Nome do tripulante">
@@ -292,39 +301,40 @@
     <div id="toast" class="toast"></div>
 
     <script src="app.js"></script>
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-logo">
+                <h2>Painel de Operações da Nave</h2>
+                <p>Gerenciamento Espacial em Tempo Real</p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Navegação</h3>
+
+                <a href="#dashboard">Dashboard</a>
+                <a href="#mapa">Mapa Estelar</a>
+                <a href="#missoes">Missões</a>
+                <a href="#frota">Frota</a>
+            </div>
+
+            <div class="footer-info">
+                <h3>Projeto</h3>
+
+                <p>Curso Técnico em Desenvolvimento de Sistemas</p>
+                <p>2026</p>
+            </div>
+
+        </div>
+
+        <div class="footer-copy">
+
+            © 2026 • Desenvolvido por <strong>GustavoJ</strong>
+
+        </div>
+
+    </footer>
 </body>
-<footer class="footer">
-
-    <div class="footer-container">
-
-        <div class="footer-logo">
-            <h2>Painel de Operações da Nave</h2>
-            <p>Gerenciamento Espacial em Tempo Real</p>
-        </div>
-
-        <div class="footer-links">
-            <h3>Navegação</h3>
-
-            <a href="#dashboard">Dashboard</a>
-            <a href="#mapa">Mapa Estelar</a>
-            <a href="#missoes">Missões</a>
-            <a href="#frota">Frota</a>
-        </div>
-
-        <div class="footer-info">
-            <h3>Projeto</h3>
-
-            <p>Curso Técnico em Desenvolvimento de Sistemas</p>
-            <p>2026</p>
-        </div>
-
-    </div>
-
-    <div class="footer-copy">
-
-        © 2026 • Desenvolvido por <strong>GustavoJ</strong>
-
-    </div>
-
-</footer>
 </html>

@@ -1,16 +1,3 @@
-// =======================================================
-// PAINEL DE OPERAÇÕES DA NAVE
-// app.js
-// Desenvolvido por: Gustavo
-// =======================================================
-
-
-// ===============================================
-// BANCO DE DADOS (SIMULADO)
-// ===============================================
-
-// ---------- PLANETAS ----------
-
 let planetas = [
 
     {
@@ -238,6 +225,8 @@ const listaHistorico = document.getElementById("listaHistorico");
 const listaGrupos = document.getElementById("listaGrupos");
 
 const listaTripulantesLivres = document.getElementById("listaTripulantesLivres");
+
+const listaIntegrantesGrupos = document.getElementById("listaIntegrantesGrupos");
 
 
 
@@ -1082,6 +1071,8 @@ function desenharMissoes(lista = listaMissoes){
 
             <td>${formatarResponsaveis(missao.responsavel)}</td>
 
+            <td>${classeStatus==="concluida" ? formatarResponsaveis(missao.concluidoPor) : "-"}</td>
+
             <td>${missao.prioridade || "-"}</td>
 
             <td>
@@ -1146,27 +1137,33 @@ function desenharHistorico(){
 
     }
 
-    listaHistorico.innerHTML = "";
+    // Mostra apenas a última missão concluída aqui.
+    // O histórico completo com todas as missões concluídas
+    // e o ranking ficam somente na página historico.html.
 
-    concluidas.forEach(missao=>{
+    const ultimaConcluida = [...concluidas].sort((a,b)=>{
 
-        listaHistorico.innerHTML += `
+        return (b.concluidaEm || 0) - (a.concluidaEm || 0);
 
-        <div class="item-historico">
+    })[0];
 
-            <span class="nome-historico">${missao.nome}</span>
+    listaHistorico.innerHTML = `
 
-            <span>${missao.destino}</span>
+    <div class="item-historico">
 
-            <span>${formatarResponsaveis(missao.responsavel)}</span>
+        <span class="nome-historico">${ultimaConcluida.nome}</span>
 
-            <span>${missao.data || "-"}</span>
+        <span>${ultimaConcluida.destino}</span>
 
-        </div>
+        <span><strong>Responsável:</strong> ${formatarResponsaveis(ultimaConcluida.responsavel)}</span>
 
-        `;
+        <span><strong>Concluída por:</strong> ${formatarResponsaveis(ultimaConcluida.concluidoPor)}</span>
 
-    });
+        <span>${ultimaConcluida.data || "-"}</span>
+
+    </div>
+
+    `;
 
 }
 
@@ -1332,7 +1329,7 @@ function abrirConcluirMissao(id){
 
     document.getElementById("nomeMissaoConcluir").textContent = missaoParaConcluir.nome;
 
-    document.getElementById("responsavelConcluirMissao").value = missaoParaConcluir.responsavel || "";
+    document.getElementById("responsavelConcluirMissao").value = missaoParaConcluir.concluidoPor || "";
 
     modalConcluirMissao.style.display="flex";
 
@@ -1358,7 +1355,9 @@ if(btnConfirmarConcluirMissao){
 
         missaoParaConcluir.status = "Concluída";
 
-        missaoParaConcluir.responsavel = responsaveis;
+        missaoParaConcluir.concluidoPor = responsaveis;
+
+        missaoParaConcluir.concluidaEm = Date.now();
 
         desenharMissoes();
 
@@ -1513,11 +1512,62 @@ function desenharGrupos(lista = gruposFrota){
 
     });
 
+    desenharIntegrantesGrupos();
+
     atualizarStatsTripulantes();
 
     atualizarDashboard();
 
     salvarSistema();
+
+}
+
+// ===========================================
+// TODOS OS INTEGRANTES DA TRIPULAÇÃO (EM GRUPOS)
+// ===========================================
+// Espaço só com quem já está em um grupo, separado
+// da lista de tripulantes livres (que não estão em nenhum grupo).
+
+function desenharIntegrantesGrupos(){
+
+    if(!listaIntegrantesGrupos) return;
+
+    if(gruposFrota.length===0){
+
+        listaIntegrantesGrupos.innerHTML = "<p>Nenhum tripulante em grupos no momento.</p>";
+
+        return;
+
+    }
+
+    const semIntegrantes = gruposFrota.every(grupo=>grupo.integrantes.length===0);
+
+    if(semIntegrantes){
+
+        listaIntegrantesGrupos.innerHTML = "<p>Nenhum tripulante em grupos no momento.</p>";
+
+        return;
+
+    }
+
+    listaIntegrantesGrupos.innerHTML = "";
+
+    gruposFrota.forEach(grupo=>{
+
+        if(grupo.integrantes.length===0) return;
+
+        const tags = grupo.integrantes.map(nome=>`<span class="pessoa-tag">${nome}</span>`).join("");
+
+        listaIntegrantesGrupos.innerHTML += `
+
+        <div class="integrantes-grupo-linha">
+            <span class="integrantes-grupo-nome">${grupo.nome}</span>
+            <div class="integrantes-grupo-tags">${tags}</div>
+        </div>
+
+        `;
+
+    });
 
 }
 

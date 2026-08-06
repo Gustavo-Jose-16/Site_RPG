@@ -1,11 +1,3 @@
-// =======================================================
-// HISTÓRICO DE MISSÕES + RANKING DE TRIPULANTES
-// historico.js
-// =======================================================
-
-// Classifica o status de uma missão de forma tolerante
-// (mesma lógica usada em app.js, mantida em sincronia)
-
 function classificarStatus(status){
 
     const texto = (status || "").toLowerCase();
@@ -111,7 +103,7 @@ function desenharTabelaHistorico(){
 
     if(missoesConcluidas.length===0){
 
-        corpo.innerHTML = `<tr><td colspan="5">Nenhuma missão concluída até o momento.</td></tr>`;
+        corpo.innerHTML = `<tr><td colspan="6">Nenhuma missão concluída até o momento.</td></tr>`;
 
         return;
 
@@ -126,6 +118,7 @@ function desenharTabelaHistorico(){
             <td>${missao.nome}</td>
             <td>${missao.destino}</td>
             <td>${formatarResponsaveis(missao.responsavel)}</td>
+            <td>${formatarResponsaveis(missao.concluidoPor)}</td>
             <td>${missao.prioridade || "-"}</td>
             <td>${missao.data || "-"}</td>
         </tr>
@@ -145,7 +138,7 @@ function calcularRanking(){
 
     missoesConcluidas.forEach(missao=>{
 
-        const pessoas = listarResponsaveis(missao.responsavel);
+        const pessoas = listarResponsaveis(missao.concluidoPor);
 
         if(pessoas.length===0){
 
