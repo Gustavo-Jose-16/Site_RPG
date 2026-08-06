@@ -94,7 +94,6 @@ let planetas = [
 
 
 // ---------- MISSÕES ----------
-
 let listaMissoes = [
 
     {
@@ -137,7 +136,6 @@ let listaMissoes = [
 
 
 // ---------- FROTA ----------
-
 let gruposFrota = [
 
     {
@@ -1523,51 +1521,32 @@ function desenharGrupos(lista = gruposFrota){
 }
 
 // ===========================================
-// TODOS OS INTEGRANTES DA TRIPULAÇÃO (EM GRUPOS)
+// TRIPULANTES FORA DE GRUPO
 // ===========================================
-// Espaço só com quem já está em um grupo, separado
-// da lista de tripulantes livres (que não estão em nenhum grupo).
+// Espaço com quem ainda NÃO está em nenhum grupo,
+// puxado da lista de tripulantesLivres.
 
 function desenharIntegrantesGrupos(){
 
     if(!listaIntegrantesGrupos) return;
 
-    if(gruposFrota.length===0){
+    if(tripulantesLivres.length===0){
 
-        listaIntegrantesGrupos.innerHTML = "<p>Nenhum tripulante em grupos no momento.</p>";
-
-        return;
-
-    }
-
-    const semIntegrantes = gruposFrota.every(grupo=>grupo.integrantes.length===0);
-
-    if(semIntegrantes){
-
-        listaIntegrantesGrupos.innerHTML = "<p>Nenhum tripulante em grupos no momento.</p>";
+        listaIntegrantesGrupos.innerHTML = "<p>Nenhum tripulante fora de grupo no momento.</p>";
 
         return;
 
     }
 
-    listaIntegrantesGrupos.innerHTML = "";
+    const tags = tripulantesLivres.map(pessoa=>`<span class="pessoa-tag">${pessoa.nome}</span>`).join("");
 
-    gruposFrota.forEach(grupo=>{
+    listaIntegrantesGrupos.innerHTML = `
 
-        if(grupo.integrantes.length===0) return;
+    <div class="integrantes-grupo-linha">
+        <div class="integrantes-grupo-tags">${tags}</div>
+    </div>
 
-        const tags = grupo.integrantes.map(nome=>`<span class="pessoa-tag">${nome}</span>`).join("");
-
-        listaIntegrantesGrupos.innerHTML += `
-
-        <div class="integrantes-grupo-linha">
-            <span class="integrantes-grupo-nome">${grupo.nome}</span>
-            <div class="integrantes-grupo-tags">${tags}</div>
-        </div>
-
-        `;
-
-    });
+    `;
 
 }
 
@@ -1680,6 +1659,8 @@ function desenharTripulantesLivres(){
         `;
 
     });
+
+    desenharIntegrantesGrupos();
 
     atualizarStatsTripulantes();
 
@@ -2112,10 +2093,6 @@ if(temaSalvo==="true"){
     document.body.classList.add("temaClaro");
 
 }
-
-// ===========================================
-// BOTÃO INICIAR SISTEMA
-// ===========================================
 
 const btnIniciarSistema = document.getElementById("btnIniciarSistema");
 
