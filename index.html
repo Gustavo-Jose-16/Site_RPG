@@ -16,8 +16,6 @@
 </head>
 
 <body>
-    <button id="tema">🌙 Tema</button>
-
     <div id="notificacao"></div>
 
     <div id="loading">
@@ -35,9 +33,13 @@
             <a href="#mapa">Mapa</a>
             <a href="#missoes">Missões</a>
             <a href="#frota">Frota</a>
+            <a href="historico.html">Histórico</a>
         </nav>
 
-        <button id="menuMobile" class="menu-mobile">☰</button>
+        <div class="header-acoes">
+            <button id="tema">🌙 Tema</button>
+            <button id="menuMobile" class="menu-mobile">☰</button>
+        </div>
     </header>
 
     <section class="painel-topo">
@@ -119,6 +121,16 @@
                 <option>Médio</option>
                 <option>Alto</option>
             </select>
+            <select id="corPlaneta">
+                <option value="">Cor automática</option>
+                <option value="amarelo">Amarelo</option>
+                <option value="verde">Verde</option>
+                <option value="vermelho">Vermelho</option>
+                <option value="rosa">Rosa</option>
+                <option value="roxo">Roxo</option>
+                <option value="azul-claro">Azul Claro</option>
+                <option value="azul-escuro">Azul Escuro</option>
+            </select>
             <textarea id="descricaoPlaneta" placeholder="Descrição"></textarea>
             <button id="salvarPlaneta" class="botao">Salvar Planeta</button>
         </div>
@@ -149,7 +161,10 @@
         </table>
 
         <div class="historico-missoes">
-            <h3 class="subtitulo">📜 Histórico de Missões Concluídas</h3>
+            <div class="historico-cabecalho">
+                <h3 class="subtitulo">📜 Histórico de Missões Concluídas</h3>
+                <a href="historico.html" class="link-historico">Ver histórico completo e ranking →</a>
+            </div>
             <div id="listaHistorico" class="lista-historico"></div>
         </div>
     </section>
@@ -159,7 +174,7 @@
             <h2>Nova Missão</h2>
             <input id="nomeMissao" placeholder="Nome da missão">
             <input id="destinoMissao" placeholder="Destino">
-            <input id="responsavelMissao" placeholder="Responsável">
+            <input id="responsavelMissao" placeholder="Responsável(is) — separe por vírgula se for mais de um">
             <input id="dataMissao" type="date">
             <select id="prioridadeMissao">
                 <option>Baixa</option>
@@ -175,8 +190,32 @@
         </div>
     </div>
 
+    <div id="modalConcluirMissao" class="modal">
+        <div class="modal-conteudo">
+            <h2>✅ Concluir Missão</h2>
+            <p class="texto-concluir">Missão: <strong id="nomeMissaoConcluir"></strong></p>
+            <input id="responsavelConcluirMissao" placeholder="Quem concluiu — separe por vírgula se for mais de uma pessoa">
+            <button id="confirmarConcluirMissao" class="botao">Confirmar Conclusão</button>
+        </div>
+    </div>
+
     <section id="frota" class="frota">
         <h2 class="titulo">👨‍🚀 FROTA ESPACIAL</h2>
+
+        <div class="stats-tripulantes">
+            <div class="stat-tripulante">
+                <span class="stat-numero" id="statTotalTripulantes">0</span>
+                <span class="stat-legenda">Total de Tripulantes</span>
+            </div>
+            <div class="stat-tripulante">
+                <span class="stat-numero" id="statTripulantesGrupos">0</span>
+                <span class="stat-legenda">Em Grupos</span>
+            </div>
+            <div class="stat-tripulante">
+                <span class="stat-numero" id="statTripulantesLivres">0</span>
+                <span class="stat-legenda">Tripulantes Livres</span>
+            </div>
+        </div>
 
         <div class="acoes-frota">
             <input id="pesquisaGrupo" type="text" placeholder="Pesquisar grupo...">
@@ -186,17 +225,25 @@
         <div id="listaGrupos" class="lista-grupos"></div>
 
         <div class="tripulantes-livres">
-            <h3 class="subtitulo">🧑‍🚀 Tripulantes Livres</h3>
-            <p class="descricao-livres">Tripulantes que ainda não fazem parte de nenhum grupo.</p>
+            <h3 class="subtitulo">🧑‍🚀 Tripulantes </h3>
+            <p class="descricao-livres">Todos os Tripulantes da Nave.</p>
 
             <div class="acoes-frota">
                 <input id="nomeTripulanteLivre" type="text" placeholder="Nome do tripulante">
                 <button id="btnAddTripulanteLivre" class="botao">+ Adicionar</button>
             </div>
 
-            <div id="listaTripulantesLivres" class="lista-chips"></div>
+            <div id="listaTripulantesLivres" class="lista-tripulantes-livres"></div>
         </div>
     </section>
+
+    <div id="modalCaracteristicasTripulante" class="modal">
+        <div class="modal-conteudo">
+            <h2>Características de <span id="nomeTripulanteCaracteristicas"></span></h2>
+            <textarea id="caracteristicasTripulante" placeholder="Ex: Piloto experiente, especialista em navegação, ótimo trabalho em equipe..."></textarea>
+            <button id="salvarCaracteristicasTripulante" class="botao">Salvar</button>
+        </div>
+    </div>
 
     <div id="modalGrupo" class="modal">
         <div class="modal-conteudo">
@@ -214,15 +261,36 @@
         </div>
     </div>
 
+    <div id="modalDetalhesGrupo" class="modal">
+        <div class="modal-conteudo modal-detalhes">
+            <h2 id="detalheNomeGrupo">Grupo</h2>
+
+            <div class="detalhe-linha">
+                <strong>Capitão</strong>
+                <span id="detalheCapitaoGrupo"></span>
+            </div>
+
+            <div class="detalhe-linha">
+                <strong>Especialidade</strong>
+                <span id="detalheEspecialidadeGrupo"></span>
+            </div>
+
+            <div class="detalhe-linha">
+                <strong>Nível</strong>
+                <span id="detalheNivelGrupo" class="nivel-badge"></span>
+            </div>
+
+            <div class="detalhe-integrantes">
+                <strong>Integrantes</strong>
+                <div id="detalheIntegrantesGrupo" class="lista-tags-integrantes"></div>
+            </div>
+
+            <button class="botao" onclick="document.getElementById('modalDetalhesGrupo').style.display='none'">Fechar</button>
+        </div>
+    </div>
+
     <div id="toast" class="toast"></div>
 
     <script src="app.js"></script>
 </body>
-<footer class="rodape">
-
-    <p>© 2026 Painel de Operações da Nave</p>
-
-    <p>Desenvolvido por <strong>GustavoJ</strong></p>
-
-</footer>
 </html>

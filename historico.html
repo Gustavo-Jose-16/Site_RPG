@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Histórico de Missões — Painel da Nave</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="notificacao"></div>
+
+    <div class="estrelas"></div>
+
+    <header>
+        <div class="logo">🚀 PAINEL DA NAVE</div>
+
+        <nav>
+            <a href="index.html#dashboard">Dashboard</a>
+            <a href="index.html#mapa">Mapa</a>
+            <a href="index.html#missoes">Missões</a>
+            <a href="index.html#frota">Frota</a>
+            <a href="historico.html" class="ativo-nav">Histórico</a>
+        </nav>
+
+        <div class="header-acoes">
+            <button id="tema" class="visivel">🌙 Tema</button>
+            <button id="menuMobile" class="menu-mobile">☰</button>
+        </div>
+    </header>
+
+    <section class="pagina-historico">
+        <a href="index.html" class="voltar-link">← Voltar ao Painel</a>
+
+        <h1 class="titulo-pagina">📜 Histórico de Missões Concluídas</h1>
+        <p class="subtitulo-pagina">Registro completo de todas as missões finalizadas e quem foi responsável por cada uma.</p>
+
+        <div id="resumoHistorico" class="resumo-historico"></div>
+
+        <table class="tabela-historico">
+            <thead>
+                <tr>
+                    <th>Missão</th>
+                    <th>Destino</th>
+                    <th>Concluída por</th>
+                    <th>Prioridade</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaHistoricoCompleto"></tbody>
+        </table>
+    </section>
+
+    <section class="pagina-ranking">
+        <h2 class="titulo-pagina">🏆 Ranking de Tripulantes</h2>
+        <p class="subtitulo-pagina">Quem mais concluiu missões pela Frota Espacial.</p>
+
+        <div id="listaRanking" class="lista-ranking"></div>
+    </section>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="historico.js"></script>
+</body>
+</html>

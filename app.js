@@ -56,6 +56,51 @@ let planetas = [
         risco:"Médio",
         recursos:"Vegetação Exótica",
         descricao:"Planeta destinado às pesquisas."
+    },
+
+    {
+        id:6,
+        nome:"Xandar Prime",
+        setor:"Ômega",
+        risco:"Alto",
+        recursos:"Cristais Quânticos, Plasma Azul",
+        descricao:"Antiga capital de uma civilização perdida, cercada por tempestades de plasma."
+    },
+
+    {
+        id:7,
+        nome:"Nébula Vermelha IX",
+        setor:"Épsilon",
+        risco:"Alto",
+        recursos:"Gás Ionizado, Minério Escarlate",
+        descricao:"Nuvem de gás habitável envolta em radiação vermelha intensa."
+    },
+
+    {
+        id:8,
+        nome:"Cryonis",
+        setor:"Zeta",
+        risco:"Médio",
+        recursos:"Gelo Puro, Energia Geotérmica",
+        descricao:"Mundo gelado com oceanos subterrâneos e auroras permanentes."
+    },
+
+    {
+        id:9,
+        nome:"Draknor",
+        setor:"Sigma",
+        risco:"Alto",
+        recursos:"Ligas Metálicas Raras",
+        descricao:"Planeta vulcânico habitado por formas de vida extremófilas."
+    },
+
+    {
+        id:10,
+        nome:"Aurora Celestis",
+        setor:"Alpha",
+        risco:"Baixo",
+        recursos:"Flora Bioluminescente",
+        descricao:"Santuário natural conhecido pelos céus multicoloridos e clima ameno."
     }
 
 ];
@@ -267,6 +312,42 @@ function classificarStatus(status){
     }
 
     return "ativa";
+
+}
+
+
+
+// Transforma "Nome1, Nome2" em uma lista de nomes limpos.
+// Usado tanto para exibir quanto para contar no ranking
+// (cada pessoa conta 1 missão concluída).
+
+function listarResponsaveis(texto){
+
+    return (texto || "")
+
+        .split(",")
+
+        .map(nome=>nome.trim())
+
+        .filter(nome=>nome.length>0);
+
+}
+
+
+
+// Monta os "chips" de responsável para exibição na tabela
+
+function formatarResponsaveis(texto){
+
+    const nomes = listarResponsaveis(texto);
+
+    if(nomes.length===0){
+
+        return "-";
+
+    }
+
+    return nomes.map(nome=>`<span class="pessoa-tag">${nome}</span>`).join("");
 
 }
 
@@ -562,6 +643,80 @@ window.addEventListener("load",()=>{
 
 // Desenha todos os planetas
 
+// Gera uma "imagem" (esfera com degradê) para cada planeta.
+// Se o usuário escolher uma cor (coringa), usa ela; senão,
+// gera uma cor consistente a partir do nome do planeta.
+
+const paletaPorCor = {
+
+    "amarelo": ["#f7971e","#ffd200"],
+
+    "verde": ["#11998e","#38ef7d"],
+
+    "vermelho": ["#eb3349","#f45c43"],
+
+    "rosa": ["#f857a6","#ff5858"],
+
+    "roxo": ["#8E2DE2","#4A00E0"],
+
+    "azul-claro": ["#4facfe","#00f2fe"],
+
+    "azul-escuro": ["#1e3c72","#2a5298"]
+
+};
+
+const paletasPlanetas = [
+
+    ["#4facfe","#00f2fe"],
+
+    ["#f83600","#f9d423"],
+
+    ["#8E2DE2","#4A00E0"],
+
+    ["#11998e","#38ef7d"],
+
+    ["#eb3349","#f45c43"],
+
+    ["#c31432","#240b36"],
+
+    ["#f7971e","#ffd200"],
+
+    ["#2193b0","#6dd5ed"],
+
+    ["#ee0979","#ff6a00"],
+
+    ["#00c6ff","#0072ff"]
+
+];
+
+function imagemPlaneta(planeta){
+
+    if(planeta.cor && paletaPorCor[planeta.cor]){
+
+        const [corA, corB] = paletaPorCor[planeta.cor];
+
+        return `radial-gradient(circle at 32% 28%, ${corA}, ${corB} 75%)`;
+
+    }
+
+    let hash = 0;
+
+    for(let i=0;i<planeta.nome.length;i++){
+
+        hash = planeta.nome.charCodeAt(i) + ((hash<<5)-hash);
+
+    }
+
+    const indice = Math.abs(hash) % paletasPlanetas.length;
+
+    const [corA, corB] = paletasPlanetas[indice];
+
+    return `radial-gradient(circle at 32% 28%, ${corA}, ${corB} 75%)`;
+
+}
+
+
+
 function desenharPlanetas(lista = planetas){
 
     if(!listaPlanetas) return;
@@ -587,6 +742,8 @@ function desenharPlanetas(lista = planetas){
         listaPlanetas.innerHTML += `
 
         <div class="planeta">
+
+            <div class="planeta-imagem ${planeta.risco=="Alto" ? "tem-anel" : ""}" style="background:${imagemPlaneta(planeta)}"></div>
 
             <h3>${planeta.nome}</h3>
 
@@ -645,6 +802,8 @@ function abrirPlaneta(id){
     if(!planeta) return;
 
     infoPlaneta.innerHTML = `
+
+        <div class="planeta-imagem planeta-imagem-grande ${planeta.risco=="Alto" ? "tem-anel" : ""}" style="background:${imagemPlaneta(planeta)}"></div>
 
         <h2>${planeta.nome}</h2>
 
@@ -716,6 +875,8 @@ document.getElementById("recursosPlaneta").value="";
 
 document.getElementById("riscoPlaneta").value="Baixo";
 
+document.getElementById("corPlaneta").value="";
+
 document.getElementById("descricaoPlaneta").value="";
 
 modalPlaneta.style.display="flex";
@@ -742,6 +903,8 @@ const recursos=document.getElementById("recursosPlaneta").value;
 
 const risco=document.getElementById("riscoPlaneta").value;
 
+const cor=document.getElementById("corPlaneta").value;
+
 const descricao=document.getElementById("descricaoPlaneta").value;
 
 if(nome=="" || setor==""){
@@ -764,6 +927,8 @@ setor,
 
 risco,
 
+cor,
+
 recursos,
 
 descricao
@@ -779,6 +944,8 @@ editandoPlaneta.nome=nome;
 editandoPlaneta.setor=setor;
 
 editandoPlaneta.risco=risco;
+
+editandoPlaneta.cor=cor;
 
 editandoPlaneta.recursos=recursos;
 
@@ -854,6 +1021,8 @@ document.getElementById("descricaoPlaneta").value = planeta.descricao;
 
 document.getElementById("riscoPlaneta").value = planeta.risco;
 
+document.getElementById("corPlaneta").value = planeta.cor || "";
+
 modalPlaneta.style.display="flex";
 
 }
@@ -911,7 +1080,7 @@ function desenharMissoes(lista = listaMissoes){
 
             <td>${missao.destino}</td>
 
-            <td>${missao.responsavel || "-"}</td>
+            <td>${formatarResponsaveis(missao.responsavel)}</td>
 
             <td>${missao.prioridade || "-"}</td>
 
@@ -924,6 +1093,12 @@ function desenharMissoes(lista = listaMissoes){
             <td>${missao.data || "-"}</td>
 
             <td>
+
+                ${classeStatus !== "concluida" ? `
+                <button class="btn-icone btn-icone-concluir" onclick="abrirConcluirMissao(${missao.id})" title="Concluir missão">
+                    ✅
+                </button>
+                ` : ""}
 
                 <button class="btn-icone" onclick="editarMissao(${missao.id})">
 
@@ -983,7 +1158,7 @@ function desenharHistorico(){
 
             <span>${missao.destino}</span>
 
-            <span>${missao.responsavel || "-"}</span>
+            <span>${formatarResponsaveis(missao.responsavel)}</span>
 
             <span>${missao.data || "-"}</span>
 
@@ -1142,6 +1317,66 @@ function removerMissao(id){
 }
 
 // ---------------------------
+// CONCLUIR MISSÃO
+// ---------------------------
+
+const modalConcluirMissao = document.getElementById("modalConcluirMissao");
+
+let missaoParaConcluir = null;
+
+function abrirConcluirMissao(id){
+
+    missaoParaConcluir = listaMissoes.find(m=>m.id===id);
+
+    if(!missaoParaConcluir || !modalConcluirMissao) return;
+
+    document.getElementById("nomeMissaoConcluir").textContent = missaoParaConcluir.nome;
+
+    document.getElementById("responsavelConcluirMissao").value = missaoParaConcluir.responsavel || "";
+
+    modalConcluirMissao.style.display="flex";
+
+}
+
+const btnConfirmarConcluirMissao = document.getElementById("confirmarConcluirMissao");
+
+if(btnConfirmarConcluirMissao){
+
+    btnConfirmarConcluirMissao.onclick = ()=>{
+
+        if(!missaoParaConcluir) return;
+
+        const responsaveis = document.getElementById("responsavelConcluirMissao").value.trim();
+
+        if(responsaveis===""){
+
+            alert("Informe quem concluiu a missão.");
+
+            return;
+
+        }
+
+        missaoParaConcluir.status = "Concluída";
+
+        missaoParaConcluir.responsavel = responsaveis;
+
+        desenharMissoes();
+
+        desenharGrafico();
+
+        salvarSistema();
+
+        mostrarNotificacao("✅ Missão concluída com sucesso!");
+
+        modalConcluirMissao.style.display="none";
+
+        missaoParaConcluir = null;
+
+    };
+
+}
+
+// ---------------------------
 // PESQUISA
 // ---------------------------
 
@@ -1232,11 +1467,9 @@ function desenharGrupos(lista = gruposFrota){
 
             <p><strong>Capitão:</strong> ${grupo.capitao}</p>
 
-            <p><strong>Especialidade:</strong> ${grupo.especialidade || "Não informada"}</p>
-
             <p><strong>Nível:</strong>
 
-                <span style="color:${cor}">
+                <span class="nivel-badge" style="color:${cor};border-color:${cor}">
 
                     ${grupo.nivel || "Iniciante"}
 
@@ -1252,13 +1485,13 @@ function desenharGrupos(lista = gruposFrota){
 
             </p>
 
-            <ul>
-
-                ${grupo.integrantes.map(i=>`<li>${i}</li>`).join("")}
-
-            </ul>
-
             <div class="acoes">
+
+                <button class="btn-detalhes" onclick="verDetalhesGrupo(${grupo.id})">
+
+                    👁️ Ver detalhes
+
+                </button>
 
                 <button class="btn-icone" onclick="editarGrupo(${grupo.id})">
 
@@ -1280,9 +1513,71 @@ function desenharGrupos(lista = gruposFrota){
 
     });
 
+    atualizarStatsTripulantes();
+
     atualizarDashboard();
 
     salvarSistema();
+
+}
+
+// ===========================================
+// DETALHES DO GRUPO (MODAL)
+// ===========================================
+
+const modalDetalhesGrupo = document.getElementById("modalDetalhesGrupo");
+
+function verDetalhesGrupo(id){
+
+    const grupo = gruposFrota.find(g=>g.id===id);
+
+    if(!grupo || !modalDetalhesGrupo) return;
+
+    let cor="#00F5A0";
+
+    if(grupo.nivel=="Intermediário"){
+
+        cor="orange";
+
+    }
+
+    if(grupo.nivel=="Elite"){
+
+        cor="gold";
+
+    }
+
+    document.getElementById("detalheNomeGrupo").textContent = grupo.nome;
+
+    document.getElementById("detalheCapitaoGrupo").textContent = grupo.capitao;
+
+    document.getElementById("detalheEspecialidadeGrupo").textContent = grupo.especialidade || "Não informada";
+
+    const nivelEl = document.getElementById("detalheNivelGrupo");
+
+    nivelEl.textContent = grupo.nivel || "Iniciante";
+
+    nivelEl.style.color = cor;
+
+    nivelEl.style.borderColor = cor;
+
+    const listaEl = document.getElementById("detalheIntegrantesGrupo");
+
+    if(grupo.integrantes.length===0){
+
+        listaEl.innerHTML = "<p>Nenhum integrante cadastrado.</p>";
+
+    }else{
+
+        listaEl.innerHTML = grupo.integrantes
+
+            .map(i=>`<span class="pessoa-tag">${i}</span>`)
+
+            .join("");
+
+    }
+
+    modalDetalhesGrupo.style.display="flex";
 
 }
 
@@ -1306,11 +1601,29 @@ function desenharTripulantesLivres(){
 
         listaTripulantesLivres.innerHTML += `
 
-        <div class="chip">
+        <div class="tripulante-livre-card">
 
-            <span>${pessoa.nome}</span>
+            <div class="tripulante-livre-avatar">${pessoa.nome.charAt(0).toUpperCase()}</div>
 
-            <button onclick="removerTripulanteLivre(${pessoa.id})" title="Remover">✕</button>
+            <h4>${pessoa.nome}</h4>
+
+            <p class="tripulante-caracteristicas">${pessoa.caracteristicas || "Nenhuma característica cadastrada."}</p>
+
+            <div class="acoes">
+
+                <button class="btn-icone" onclick="editarCaracteristicasTripulante(${pessoa.id})" title="Características">
+
+                    ✏️
+
+                </button>
+
+                <button class="btn-icone btn-icone-excluir" onclick="removerTripulanteLivre(${pessoa.id})" title="Remover">
+
+                    🗑️
+
+                </button>
+
+            </div>
 
         </div>
 
@@ -1318,9 +1631,37 @@ function desenharTripulantesLivres(){
 
     });
 
+    atualizarStatsTripulantes();
+
     atualizarDashboard();
 
     salvarSistema();
+
+}
+
+function atualizarStatsTripulantes(){
+
+    const statTotal = document.getElementById("statTotalTripulantes");
+
+    const statGrupos = document.getElementById("statTripulantesGrupos");
+
+    const statLivres = document.getElementById("statTripulantesLivres");
+
+    if(!statTotal || !statGrupos || !statLivres) return;
+
+    let emGrupos = 0;
+
+    gruposFrota.forEach(grupo=>{
+
+        emGrupos += grupo.integrantes.length;
+
+    });
+
+    statGrupos.textContent = emGrupos;
+
+    statLivres.textContent = tripulantesLivres.length;
+
+    statTotal.textContent = emGrupos + tripulantesLivres.length;
 
 }
 
@@ -1346,7 +1687,9 @@ tripulantesLivres.push({
 
 id:gerarId(tripulantesLivres),
 
-nome
+nome,
+
+caracteristicas:""
 
 });
 
@@ -1371,6 +1714,57 @@ desenharTripulantesLivres();
 mostrarNotificacao("🗑️ Tripulante removido.");
 
 }
+
+// ---------------------------
+// CARACTERÍSTICAS DO TRIPULANTE
+// ---------------------------
+
+const modalCaracteristicas = document.getElementById("modalCaracteristicasTripulante");
+
+let editandoCaracteristicasId = null;
+
+function editarCaracteristicasTripulante(id){
+
+    const pessoa = tripulantesLivres.find(p=>p.id===id);
+
+    if(!pessoa || !modalCaracteristicas) return;
+
+    editandoCaracteristicasId = id;
+
+    document.getElementById("nomeTripulanteCaracteristicas").textContent = pessoa.nome;
+
+    document.getElementById("caracteristicasTripulante").value = pessoa.caracteristicas || "";
+
+    modalCaracteristicas.style.display="flex";
+
+}
+
+const btnSalvarCaracteristicas = document.getElementById("salvarCaracteristicasTripulante");
+
+if(btnSalvarCaracteristicas){
+
+    btnSalvarCaracteristicas.onclick = ()=>{
+
+        const pessoa = tripulantesLivres.find(p=>p.id===editandoCaracteristicasId);
+
+        if(pessoa){
+
+            pessoa.caracteristicas = document.getElementById("caracteristicasTripulante").value.trim();
+
+            desenharTripulantesLivres();
+
+            mostrarNotificacao("✏️ Características atualizadas.");
+
+        }
+
+        modalCaracteristicas.style.display="none";
+
+        editandoCaracteristicasId = null;
+
+    };
+
+}
+
 
 // ===========================================
 // NOVO GRUPO
@@ -1546,6 +1940,24 @@ window.addEventListener("click",(e)=>{
 if(e.target===modalGrupo){
 
 modalGrupo.style.display="none";
+
+}
+
+if(e.target===modalDetalhesGrupo){
+
+modalDetalhesGrupo.style.display="none";
+
+}
+
+if(e.target===modalConcluirMissao){
+
+modalConcluirMissao.style.display="none";
+
+}
+
+if(e.target===modalCaracteristicas){
+
+modalCaracteristicas.style.display="none";
 
 }
 
