@@ -92,6 +92,7 @@ let planetas = [
 
 ];
 
+
 let listaMissoes = [
 
     {
@@ -456,8 +457,6 @@ function animarNumero(elemento, valorFinal){
 }
 
 
-
-// Atualiza todos os contadores
 
 function iniciarContadores(){
 
@@ -867,7 +866,6 @@ modalPlaneta.style.display="flex";
 
 
 
-// Salvar
 
 const salvarPlaneta = document.getElementById("salvarPlaneta");
 
