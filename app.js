@@ -92,8 +92,6 @@ let planetas = [
 
 ];
 
-
-// ---------- MISSÕES ----------
 let listaMissoes = [
 
     {
@@ -134,8 +132,6 @@ let listaMissoes = [
 
 ];
 
-
-// ---------- FROTA ----------
 let gruposFrota = [
 
     {
@@ -180,9 +176,6 @@ let gruposFrota = [
 
 ];
 
-
-
-// ---------- TRIPULANTES LIVRES ----------
 
 let tripulantesLivres = [
 

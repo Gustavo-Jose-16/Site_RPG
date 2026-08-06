@@ -21,6 +21,7 @@ function classificarStatus(status){
 // Transforma "Nome1, Nome2" em uma lista de nomes limpos.
 // Usado tanto para exibir quanto para contar no ranking
 // (cada pessoa conta 1 missão concluída).
+
 function listarResponsaveis(texto){
 
     return (texto || "")
@@ -48,6 +49,7 @@ function formatarResponsaveis(texto){
 }
 
 // CARREGAR DADOS DO PAINEL
+
 function carregarMissoes(){
 
     const dados = localStorage.getItem("painel-nave");
@@ -75,6 +77,7 @@ const listaMissoes = carregarMissoes();
 const missoesConcluidas = listaMissoes.filter(m=>classificarStatus(m.status)==="concluida");
 
 // TABELA DE HISTÓRICO
+
 function desenharTabelaHistorico(){
 
     const corpo = document.getElementById("tabelaHistoricoCompleto");
@@ -123,6 +126,7 @@ function desenharTabelaHistorico(){
 
 
 // RANKING DE TRIPULANTES
+
 function calcularRanking(){
 
     const contagem = {};
@@ -205,6 +209,7 @@ function desenharRanking(){
 }
 
 // TEMA (mesma lógica do painel principal)
+
 const temaSalvo = localStorage.getItem("tema");
 
 if(temaSalvo==="true"){
@@ -228,6 +233,7 @@ if(btnTema){
 }
 
 // MENU MOBILE
+
 const botaoMenu = document.getElementById("menuMobile");
 
 const menuNav = document.querySelector("nav");
