@@ -866,8 +866,8 @@ modalPlaneta.style.display="flex";
 
 
 
-
 const salvarPlaneta = document.getElementById("salvarPlaneta");
+
 
 if(salvarPlaneta){
 
