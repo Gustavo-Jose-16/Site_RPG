@@ -58,11 +58,11 @@ let gruposFrota = [
 
         nome:"Frota V",
 
-        capitao:"Vinicios",
+        capitao:"Vinicius",
 
         integrantes:[
 
-            "Vinicios",
+            "Vinicius",
 
             "Sarah",
 
@@ -101,7 +101,7 @@ let gruposFrota = [
 ];
 
 
-let tripulantesLivres = [
+let tripulantesNave = [
 
     {
         id:1,
@@ -130,8 +130,63 @@ let tripulantesLivres = [
 
     {
         id:6,
+        nome:"GustavoS"
+    },
+
+    {
+        id:7,
         nome:"GustavoJ"
+    },
+        
+    {
+        id:8,
+        nome:"Lucas"
+    },
+        
+    {
+        id:9,
+        nome:"Pedro"
+    },
+        
+    {
+        id:10,
+        nome:"Vinicius"
+    },
+
+        
+    {
+        id:11,
+        nome:"Henrique"
+    },
+        
+    {
+        id:12,
+        nome:"Erica"
+    },    
+    {
+        id:13,
+        nome:"Matheus"
+    },
+
+    {
+        id:14,
+        nome:"Sarah"
+    },
+    
+    {
+        id:15,
+        nome:"Igor"
+    },
+        {
+        id:16,
+        nome:"Thiago"
+    },
+        
+    {
+        id:17,
+        nome:"Gabriel"
     }
+
 ];
 
 
@@ -158,7 +213,7 @@ const listaHistorico = document.getElementById("listaHistorico");
 
 const listaGrupos = document.getElementById("listaGrupos");
 
-const listaTripulantesLivres = document.getElementById("listaTripulantesLivres");
+const listaTripulantesNave = document.getElementById("listaTripulantesNave");
 
 const listaIntegrantesGrupos = document.getElementById("listaIntegrantesGrupos");
 
@@ -168,21 +223,32 @@ const listaIntegrantesGrupos = document.getElementById("listaIntegrantesGrupos")
 // FUNÇÕES AUXILIARES
 // ===============================================
 
-// Conta todos os tripulantes (em grupos + livres)
+// tripulantesNave é a lista mestre com TODOS os integrantes da nave.
+// Um tripulante é considerado "em grupo" quando o nome dele aparece
+// na lista de integrantes de algum grupo — não precisa cadastrar
+// a pessoa duas vezes.
+
+function pessoaEstaEmGrupo(nome){
+
+    const nomeComparado = (nome || "").trim().toLowerCase();
+
+    return gruposFrota.some(grupo=>
+
+        grupo.integrantes.some(integrante=>
+
+            integrante.trim().toLowerCase() === nomeComparado
+
+        )
+
+    );
+
+}
+
+// Conta todos os tripulantes cadastrados na nave
 
 function contarTripulantes(){
 
-    let total = 0;
-
-    gruposFrota.forEach(grupo=>{
-
-        total += grupo.integrantes.length;
-
-    });
-
-    total += tripulantesLivres.length;
-
-    return total;
+    return tripulantesNave.length;
 
 }
 
@@ -294,7 +360,7 @@ function salvarSistema(){
 
             planetas:planetas,
 
-            tripulantesLivres:tripulantesLivres
+            tripulantesNave:tripulantesNave
 
         })
 
@@ -318,7 +384,7 @@ function carregarSistema(){
 
         planetas = sistema.planetas || planetas;
 
-        tripulantesLivres = sistema.tripulantesLivres || tripulantesLivres;
+        tripulantesNave = sistema.tripulantesNave || sistema.tripulantesLivres || tripulantesNave;
 
     }
 
@@ -1188,9 +1254,17 @@ document.getElementById("salvarMissao").onclick=function(){
 
         editandoMissao.prioridade=prioridade;
 
+        const eraConcluida = classificarStatus(editandoMissao.status)==="concluida";
+
         editandoMissao.status=status;
 
         editandoMissao.data=data;
+
+        if(classificarStatus(status)==="concluida" && !eraConcluida){
+
+            editandoMissao.concluidaEm = Date.now();
+
+        }
 
         mostrarNotificacao("✏️ Missão atualizada.");
 
@@ -1324,7 +1398,9 @@ if(pesquisaMissao){
 
                    m.destino.toLowerCase().includes(texto) ||
 
-                   (m.responsavel || "").toLowerCase().includes(texto);
+                   (m.responsavel || "").toLowerCase().includes(texto) ||
+
+                   (m.concluidoPor || "").toLowerCase().includes(texto);
 
         });
 
@@ -1456,22 +1532,24 @@ function desenharGrupos(lista = gruposFrota){
 // ===========================================
 // TRIPULANTES FORA DE GRUPO
 // ===========================================
-// Espaço com quem ainda NÃO está em nenhum grupo,
-// puxado da lista de tripulantesLivres.
+// Calculado a partir da lista mestre (tripulantesNave):
+// mostra apenas quem NÃO aparece em nenhum grupo.
 
 function desenharIntegrantesGrupos(){
 
     if(!listaIntegrantesGrupos) return;
 
-    if(tripulantesLivres.length===0){
+    const foraDeGrupo = tripulantesNave.filter(pessoa=>!pessoaEstaEmGrupo(pessoa.nome));
 
-        listaIntegrantesGrupos.innerHTML = "<p>Nenhum tripulante fora de grupo no momento.</p>";
+    if(foraDeGrupo.length===0){
+
+        listaIntegrantesGrupos.innerHTML = "<p>Todo mundo já está em algum grupo. 🎉</p>";
 
         return;
 
     }
 
-    const tags = tripulantesLivres.map(pessoa=>`<span class="pessoa-tag">${pessoa.nome}</span>`).join("");
+    const tags = foraDeGrupo.map(pessoa=>`<span class="pessoa-tag">${pessoa.nome}</span>`).join("");
 
     listaIntegrantesGrupos.innerHTML = `
 
@@ -1547,27 +1625,35 @@ function verDetalhesGrupo(id){
 // TRIPULANTES LIVRES
 // ===========================================
 
-function desenharTripulantesLivres(){
+function desenharTripulantesNave(){
 
-    if(!listaTripulantesLivres) return;
+    if(!listaTripulantesNave) return;
 
-    listaTripulantesLivres.innerHTML="";
+    listaTripulantesNave.innerHTML="";
 
-    if(tripulantesLivres.length===0){
+    if(tripulantesNave.length===0){
 
-        listaTripulantesLivres.innerHTML="<p>Nenhum tripulante livre no momento.</p>";
+        listaTripulantesNave.innerHTML="<p>Nenhum tripulante cadastrado ainda.</p>";
 
     }
 
-    tripulantesLivres.forEach(pessoa=>{
+    tripulantesNave.forEach(pessoa=>{
 
-        listaTripulantesLivres.innerHTML += `
+        const emGrupo = pessoaEstaEmGrupo(pessoa.nome);
+
+        listaTripulantesNave.innerHTML += `
 
         <div class="tripulante-livre-card">
 
             <div class="tripulante-livre-avatar">${pessoa.nome.charAt(0).toUpperCase()}</div>
 
             <h4>${pessoa.nome}</h4>
+
+            <span class="status-grupo-tag ${emGrupo ? "em-grupo" : "fora-grupo"}">
+
+                ${emGrupo ? "Em grupo" : "Fora de grupo"}
+
+            </span>
 
             <p class="tripulante-caracteristicas">${pessoa.caracteristicas || "Nenhuma característica cadastrada."}</p>
 
@@ -1613,19 +1699,15 @@ function atualizarStatsTripulantes(){
 
     if(!statTotal || !statGrupos || !statLivres) return;
 
-    let emGrupos = 0;
+    const emGrupos = tripulantesNave.filter(pessoa=>pessoaEstaEmGrupo(pessoa.nome)).length;
 
-    gruposFrota.forEach(grupo=>{
-
-        emGrupos += grupo.integrantes.length;
-
-    });
+    const foraDeGrupo = tripulantesNave.length - emGrupos;
 
     statGrupos.textContent = emGrupos;
 
-    statLivres.textContent = tripulantesLivres.length;
+    statLivres.textContent = foraDeGrupo;
 
-    statTotal.textContent = emGrupos + tripulantesLivres.length;
+    statTotal.textContent = tripulantesNave.length;
 
 }
 
@@ -1647,9 +1729,9 @@ return;
 
 }
 
-tripulantesLivres.push({
+tripulantesNave.push({
 
-id:gerarId(tripulantesLivres),
+id:gerarId(tripulantesNave),
 
 nome,
 
@@ -1659,7 +1741,7 @@ caracteristicas:""
 
 campoNome.value="";
 
-desenharTripulantesLivres();
+desenharTripulantesNave();
 
 mostrarNotificacao("🧑‍🚀 Tripulante livre adicionado.");
 
@@ -1671,9 +1753,9 @@ function removerTripulanteLivre(id){
 
 if(!confirm("Deseja remover este tripulante da lista de livres?")) return;
 
-tripulantesLivres = tripulantesLivres.filter(p=>p.id!==id);
+tripulantesNave = tripulantesNave.filter(p=>p.id!==id);
 
-desenharTripulantesLivres();
+desenharTripulantesNave();
 
 mostrarNotificacao("🗑️ Tripulante removido.");
 
@@ -1689,7 +1771,7 @@ let editandoCaracteristicasId = null;
 
 function editarCaracteristicasTripulante(id){
 
-    const pessoa = tripulantesLivres.find(p=>p.id===id);
+    const pessoa = tripulantesNave.find(p=>p.id===id);
 
     if(!pessoa || !modalCaracteristicas) return;
 
@@ -1709,13 +1791,13 @@ if(btnSalvarCaracteristicas){
 
     btnSalvarCaracteristicas.onclick = ()=>{
 
-        const pessoa = tripulantesLivres.find(p=>p.id===editandoCaracteristicasId);
+        const pessoa = tripulantesNave.find(p=>p.id===editandoCaracteristicasId);
 
         if(pessoa){
 
             pessoa.caracteristicas = document.getElementById("caracteristicasTripulante").value.trim();
 
-            desenharTripulantesLivres();
+            desenharTripulantesNave();
 
             mostrarNotificacao("✏️ Características atualizadas.");
 
@@ -1976,7 +2058,7 @@ console.log("Tripulantes:",contarTripulantes());
 
 desenharGrupos();
 
-desenharTripulantesLivres();
+desenharTripulantesNave();
 
 estatisticasFrota();
 function mostrarNotificacao(texto){
