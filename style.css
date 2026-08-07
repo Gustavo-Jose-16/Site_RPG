@@ -1586,10 +1586,6 @@ tbody tr:hover{
 
 }
 
-/*==========================
-   TAGS DE RESPONSÁVEL(IS)
-===========================*/
-
 .pessoa-tag{
 
     display:inline-block;
@@ -1620,9 +1616,6 @@ body.temaClaro .pessoa-tag{
 
 }
 
-/*==========================
-   DETALHES DO GRUPO
-===========================*/
 
 .btn-detalhes{
 
@@ -1727,9 +1720,6 @@ body.temaClaro .btn-detalhes:hover{
 
 }
 
-/*==========================
-   IMAGEM DOS PLANETAS
-===========================*/
 
 .planeta-imagem{
 
@@ -1790,9 +1780,6 @@ body.temaClaro .btn-detalhes:hover{
 
 }
 
-/*==========================
-   ESTATÍSTICAS DE TRIPULANTES
-===========================*/
 
 .stats-tripulantes{
 
@@ -1846,9 +1833,6 @@ body.temaClaro .btn-detalhes:hover{
 
 }
 
-/*==========================
-   TRIPULAÇÃO EM GRUPOS
-===========================*/
 
 .integrantes-grupos{
 
@@ -1916,9 +1900,6 @@ body.temaClaro .integrantes-grupo-linha{
 
 }
 
-/*==========================
-   CARDS DE TRIPULANTES LIVRES
-===========================*/
 
 .lista-tripulantes-livres{
 
@@ -2008,9 +1989,7 @@ body.temaClaro .integrantes-grupo-linha{
 
 }
 
-/*==========================
-   CONCLUIR MISSÃO
-===========================*/
+
 
 .btn-icone-concluir:hover{
 
@@ -2034,9 +2013,6 @@ body.temaClaro .integrantes-grupo-linha{
 
 }
 
-/*==========================
-   MODO CLARO — tripulantes e stats
-===========================*/
 
 body.temaClaro .stat-tripulante,
 body.temaClaro .tripulante-livre-card{
@@ -2062,9 +2038,6 @@ body.temaClaro .tripulante-livre-card h4{
     color:#00875A;
 
 }
-/*==================================
-            RODAPÉ
-===================================*/
 
 .footer{
 
@@ -2172,9 +2145,6 @@ body.temaClaro .tripulante-livre-card h4{
     }
 
 }
-/*==========================
-   ETIQUETA EM GRUPO / FORA DE GRUPO
-===========================*/
 
 .status-grupo-tag{
 

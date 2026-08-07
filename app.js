@@ -197,10 +197,6 @@ let tripulantesNave = [
 
 
 
-// ===============================================
-// ELEMENTOS DA PÁGINA
-// ===============================================
-
 const contadorPlanetas = document.getElementById("planetas");
 
 const contadorMissoes = document.getElementById("missoesTotal");
@@ -225,14 +221,6 @@ const listaIntegrantesGrupos = document.getElementById("listaIntegrantesGrupos")
 
 
 
-// ===============================================
-// FUNÇÕES AUXILIARES
-// ===============================================
-
-// tripulantesNave é a lista mestre com TODOS os integrantes da nave.
-// Um tripulante é considerado "em grupo" quando o nome dele aparece
-// na lista de integrantes de algum grupo — não precisa cadastrar
-// a pessoa duas vezes.
 
 function pessoaEstaEmGrupo(nome){
 
@@ -465,9 +453,8 @@ function carregarSistema(){
 carregarSistema();
 
 console.log("Sistema iniciado com sucesso.");
-// =======================================================
+
 // DASHBOARD
-// =======================================================
 
 
 // Atualiza os números do dashboard
@@ -501,10 +488,8 @@ function atualizarDashboard(){
 }
 
 
-
-// =====================================
 // CONTADOR ANIMADO
-// =====================================
+
 
 function animarNumero(elemento, valorFinal){
 
@@ -545,10 +530,7 @@ function iniciarContadores(){
 }
 
 
-
-// =====================================
 // RELÓGIO
-// =====================================
 
 function atualizarRelogio(){
 
@@ -565,10 +547,7 @@ function atualizarRelogio(){
 setInterval(atualizarRelogio,1000);
 
 
-
-// =====================================
 // ENERGIA DA NAVE
-// =====================================
 
 let energia = 100;
 
@@ -601,10 +580,7 @@ function atualizarEnergia(){
 setInterval(atualizarEnergia,300);
 
 
-
-// =====================================
 // TEMPERATURA
-// =====================================
 
 function atualizarTemperatura(){
 
@@ -621,10 +597,7 @@ function atualizarTemperatura(){
 setInterval(atualizarTemperatura,5000);
 
 
-
-// =====================================
 // COMUNICAÇÃO
-// =====================================
 
 function atualizarComunicacao(){
 
@@ -651,10 +624,7 @@ function atualizarComunicacao(){
 setInterval(atualizarComunicacao,4000);
 
 
-
-// =====================================
 // DATA ATUAL
-// =====================================
 
 function mostrarData(){
 
@@ -669,10 +639,7 @@ function mostrarData(){
 }
 
 
-
-// =====================================
 // INICIAR DASHBOARD
-// =====================================
 
 window.addEventListener("load",()=>{
 
@@ -689,13 +656,9 @@ window.addEventListener("load",()=>{
     mostrarData();
 
 }); 
-// ====================================================
+
 // MAPA ESTELAR
-// ====================================================
-
-
 // Desenha todos os planetas
-
 // Gera uma "imagem" (esfera com degradê) para cada planeta.
 // Se o usuário escolher uma cor (coringa), usa ela; senão,
 // gera uma cor consistente a partir do nome do planeta.
@@ -845,10 +808,7 @@ function desenharPlanetas(lista = planetas){
 }
 
 
-
-// =========================================
 // ABRIR PLANETA
-// =========================================
 
 function abrirPlaneta(id){
 
@@ -879,10 +839,7 @@ function abrirPlaneta(id){
 }
 
 
-
-// =========================================
 // PESQUISA
-// =========================================
 
 const pesquisa = document.getElementById("pesquisa");
 
@@ -905,10 +862,7 @@ desenharPlanetas(resultado);
 }
 
 
-
-// =========================================
 // NOVO PLANETA
-// =========================================
 
 const modalPlaneta = document.getElementById("modalPlaneta");
 
@@ -1020,10 +974,7 @@ modalPlaneta.style.display="none";
 }
 
 
-
-// =========================================
 // REMOVER
-// =========================================
 
 function removerPlaneta(id){
 
@@ -1052,10 +1003,7 @@ mostrarNotificacao("🗑️ Planeta removido.");
 }
 
 
-
-// =========================================
 // EDITAR
-// =========================================
 
 function editarPlaneta(id){
 
@@ -1082,10 +1030,7 @@ modalPlaneta.style.display="flex";
 }
 
 
-
-// =========================================
 // FECHAR MODAL
-// =========================================
 
 window.addEventListener("click",(e)=>{
 
@@ -1098,23 +1043,18 @@ modalPlaneta.style.display="none";
 });
 
 
-
-// =========================================
 // INICIAR
-// =========================================
 
 desenharPlanetas();
-// =====================================================
+
 // MISSÕES
-// =====================================================
 
 let editandoMissao = null;
 
 const modalMissao = document.getElementById("modalMissao");
 
-// ---------------------------
+
 // DESENHAR TABELA
-// ---------------------------
 
 function desenharMissoes(lista = listaMissoes){
 
@@ -1184,9 +1124,8 @@ function desenharMissoes(lista = listaMissoes){
 
 }
 
-// ---------------------------
+
 // HISTÓRICO DE MISSÕES CONCLUÍDAS
-// ---------------------------
 
 function desenharHistorico(){
 
@@ -1232,9 +1171,8 @@ function desenharHistorico(){
 
 }
 
-// ---------------------------
+
 // NOVA MISSÃO
-// ---------------------------
 
 const btnNovaMissao = document.getElementById("btnNovaMissao");
 
@@ -1262,9 +1200,8 @@ if(btnNovaMissao){
 
 }
 
-// ---------------------------
+
 // SALVAR
-// ---------------------------
 
 document.getElementById("salvarMissao").onclick=function(){
 
@@ -1344,9 +1281,8 @@ document.getElementById("salvarMissao").onclick=function(){
 
 };
 
-// ---------------------------
+
 // EDITAR
-// ---------------------------
 
 function editarMissao(id){
 
@@ -1370,9 +1306,8 @@ function editarMissao(id){
 
 }
 
-// ---------------------------
+
 // EXCLUIR
-// ---------------------------
 
 function removerMissao(id){
 
@@ -1386,9 +1321,8 @@ function removerMissao(id){
 
 }
 
-// ---------------------------
+
 // CONCLUIR MISSÃO
-// ---------------------------
 
 const modalConcluirMissao = document.getElementById("modalConcluirMissao");
 
@@ -1448,9 +1382,8 @@ if(btnConfirmarConcluirMissao){
 
 }
 
-// ---------------------------
+
 // PESQUISA
-// ---------------------------
 
 const pesquisaMissao = document.getElementById("pesquisaMissao");
 
@@ -1478,9 +1411,8 @@ if(pesquisaMissao){
 
 }
 
-// ---------------------------
+
 // FECHAR MODAL
-// ---------------------------
 
 window.addEventListener("click",(e)=>{
 
@@ -1492,22 +1424,19 @@ window.addEventListener("click",(e)=>{
 
 });
 
-// ---------------------------
+
 // INICIAR
-// ---------------------------
 
 desenharMissoes();
-// =====================================================
+
 // FROTA ESPACIAL
-// =====================================================
 
 let editandoGrupo = null;
 
 const modalGrupo = document.getElementById("modalGrupo");
 
-// ===========================================
+
 // DESENHAR GRUPOS
-// ===========================================
 
 function desenharGrupos(lista = gruposFrota){
 
@@ -1599,9 +1528,8 @@ function desenharGrupos(lista = gruposFrota){
 
 }
 
-// ===========================================
+
 // TRIPULANTES FORA DE GRUPO
-// ===========================================
 // Calculado a partir da lista mestre (tripulantesNave):
 // mostra apenas quem NÃO aparece em nenhum grupo.
 
@@ -1631,9 +1559,8 @@ function desenharIntegrantesGrupos(){
 
 }
 
-// ===========================================
+
 // DETALHES DO GRUPO (MODAL)
-// ===========================================
 
 const modalDetalhesGrupo = document.getElementById("modalDetalhesGrupo");
 
@@ -1691,9 +1618,8 @@ function verDetalhesGrupo(id){
 
 }
 
-// ===========================================
+
 // TRIPULANTES LIVRES
-// ===========================================
 
 function desenharTripulantesNave(){
 
@@ -1831,9 +1757,8 @@ mostrarNotificacao("🗑️ Tripulante removido.");
 
 }
 
-// ---------------------------
+
 // CARACTERÍSTICAS DO TRIPULANTE
-// ---------------------------
 
 const modalCaracteristicas = document.getElementById("modalCaracteristicasTripulante");
 
@@ -1882,9 +1807,7 @@ if(btnSalvarCaracteristicas){
 }
 
 
-// ===========================================
 // NOVO GRUPO
-// ===========================================
 
 const btnNovoGrupo=document.getElementById("btnNovoGrupo");
 
@@ -1910,9 +1833,8 @@ modalGrupo.style.display="flex";
 
 }
 
-// ===========================================
+
 // SALVAR
-// ===========================================
 
 document.getElementById("salvarGrupo").onclick=function(){
 
@@ -1979,9 +1901,8 @@ desenharGrupos();
 
 };
 
-// ===========================================
+
 // EDITAR
-// ===========================================
 
 function editarGrupo(id){
 
@@ -2003,9 +1924,8 @@ modalGrupo.style.display="flex";
 
 }
 
-// ===========================================
+
 // REMOVER
-// ===========================================
 
 function removerGrupo(id){
 
@@ -2019,9 +1939,8 @@ mostrarNotificacao("🗑️ Grupo removido.");
 
 }
 
-// ===========================================
+
 // PESQUISA
-// ===========================================
 
 const pesquisaGrupo=document.getElementById("pesquisaGrupo");
 
@@ -2047,9 +1966,8 @@ desenharGrupos(resultado);
 
 }
 
-// ===========================================
+
 // FECHAR MODAL
-// ===========================================
 
 window.addEventListener("click",(e)=>{
 
@@ -2079,9 +1997,8 @@ modalCaracteristicas.style.display="none";
 
 });
 
-// ===========================================
+
 // ESTATÍSTICAS DA FROTA
-// ===========================================
 
 function estatisticasFrota(){
 
@@ -2122,9 +2039,8 @@ console.log("Tripulantes:",contarTripulantes());
 
 }
 
-// ===========================================
+
 // INICIAR
-// ===========================================
 
 desenharGrupos();
 
