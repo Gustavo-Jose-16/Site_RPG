@@ -5,6 +5,7 @@ let planetas = [
         nome:"Verdejante",
         setor:"Sistema solar tião",
         risco:"Medio",
+        cor:"verde",
         recursos:"???",
         descricao:"Inimigos Perigosos"
     }
@@ -21,10 +22,16 @@ let listaMissoes = [
         nome:"Restauração do Painel de Operações",
 
         destino:"Verdejante",
-        
-        Responsável: "Joaquim",
 
-        status:"Em andamento"
+        responsavel: "Joaquim",
+
+        prioridade: "Alta",
+
+        status:"Em andamento",
+
+        data: "2026-08-06",
+
+        concluidoPor: ""
 
     },
 
@@ -186,7 +193,6 @@ let tripulantesNave = [
         id:17,
         nome:"Gabriel"
     }
-
 ];
 
 
@@ -301,6 +307,66 @@ function classificarStatus(status){
     }
 
     return "ativa";
+
+}
+
+// Classifica o risco do planeta de forma tolerante a
+// acento/maiúscula (ex: "Medio", "médio", "MÉDIO" tudo funciona)
+
+function classificarRisco(risco){
+
+    const texto = (risco || "")
+
+        .toLowerCase()
+
+        .normalize("NFD")
+
+        .replace(/[\u0300-\u036f]/g,"");
+
+    if(texto.includes("alto")){
+
+        return "alto";
+
+    }
+
+    if(texto.includes("medio")){
+
+        return "medio";
+
+    }
+
+    return "baixo";
+
+}
+
+
+
+// Classifica o nível do grupo de forma tolerante a
+// acento/maiúscula (ex: "Intermediario", "ELITE" tudo funciona)
+
+function classificarNivel(nivel){
+
+    const texto = (nivel || "")
+
+        .toLowerCase()
+
+        .normalize("NFD")
+
+        .replace(/[\u0300-\u036f]/g,"");
+
+    if(texto.includes("elite")){
+
+        return "elite";
+
+    }
+
+    if(texto.includes("intermediario")){
+
+        return "intermediario";
+
+    }
+
+    return "iniciante";
 
 }
 
@@ -714,13 +780,15 @@ function desenharPlanetas(lista = planetas){
 
         let cor="#00F5A0";
 
-        if(planeta.risco=="Médio"){
+        const nivelRisco = classificarRisco(planeta.risco);
+
+        if(nivelRisco=="medio"){
 
             cor="orange";
 
         }
 
-        if(planeta.risco=="Alto"){
+        if(nivelRisco=="alto"){
 
             cor="red";
 
@@ -730,7 +798,7 @@ function desenharPlanetas(lista = planetas){
 
         <div class="planeta">
 
-            <div class="planeta-imagem ${planeta.risco=="Alto" ? "tem-anel" : ""}" style="background:${imagemPlaneta(planeta)}"></div>
+            <div class="planeta-imagem ${nivelRisco=="alto" ? "tem-anel" : ""}" style="background:${imagemPlaneta(planeta)}"></div>
 
             <h3>${planeta.nome}</h3>
 
@@ -790,7 +858,7 @@ function abrirPlaneta(id){
 
     infoPlaneta.innerHTML = `
 
-        <div class="planeta-imagem planeta-imagem-grande ${planeta.risco=="Alto" ? "tem-anel" : ""}" style="background:${imagemPlaneta(planeta)}"></div>
+        <div class="planeta-imagem planeta-imagem-grande ${classificarRisco(planeta.risco)=="alto" ? "tem-anel" : ""}" style="background:${imagemPlaneta(planeta)}"></div>
 
         <h2>${planeta.nome}</h2>
 
@@ -1451,13 +1519,15 @@ function desenharGrupos(lista = gruposFrota){
 
         let cor="#00F5A0";
 
-        if(grupo.nivel=="Intermediário"){
+        const nivelGrupo = classificarNivel(grupo.nivel);
+
+        if(nivelGrupo=="intermediario"){
 
             cor="orange";
 
         }
 
-        if(grupo.nivel=="Elite"){
+        if(nivelGrupo=="elite"){
 
             cor="gold";
 
@@ -1575,13 +1645,13 @@ function verDetalhesGrupo(id){
 
     let cor="#00F5A0";
 
-    if(grupo.nivel=="Intermediário"){
+    if(classificarNivel(grupo.nivel)=="intermediario"){
 
         cor="orange";
 
     }
 
-    if(grupo.nivel=="Elite"){
+    if(classificarNivel(grupo.nivel)=="elite"){
 
         cor="gold";
 
