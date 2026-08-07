@@ -2,92 +2,11 @@ let planetas = [
 
     {
         id:1,
-        nome:"Terra",
-        setor:"Alpha",
-        risco:"Baixo",
-        recursos:"Água, Oxigênio",
-        descricao:"Planeta sede da Frota Espacial."
-    },
-
-    {
-        id:2,
-        nome:"Marte",
-        setor:"Beta",
-        risco:"Médio",
-        recursos:"Ferro, Titânio",
-        descricao:"Principal planeta de mineração."
-    },
-
-    {
-        id:3,
-        nome:"Pandora",
-        setor:"Ômega",
-        risco:"Alto",
-        recursos:"Cristais de Energia",
-        descricao:"Habitat de espécies desconhecidas."
-    },
-
-    {
-        id:4,
-        nome:"Europa",
-        setor:"Gamma",
-        risco:"Baixo",
-        recursos:"Água Congelada",
-        descricao:"Base científica."
-    },
-
-    {
-        id:5,
-        nome:"Kepler-22B",
-        setor:"Delta",
-        risco:"Médio",
-        recursos:"Vegetação Exótica",
-        descricao:"Planeta destinado às pesquisas."
-    },
-
-    {
-        id:6,
-        nome:"Xandar Prime",
-        setor:"Ômega",
-        risco:"Alto",
-        recursos:"Cristais Quânticos, Plasma Azul",
-        descricao:"Antiga capital de uma civilização perdida, cercada por tempestades de plasma."
-    },
-
-    {
-        id:7,
-        nome:"Nébula Vermelha IX",
-        setor:"Épsilon",
-        risco:"Alto",
-        recursos:"Gás Ionizado, Minério Escarlate",
-        descricao:"Nuvem de gás habitável envolta em radiação vermelha intensa."
-    },
-
-    {
-        id:8,
-        nome:"Cryonis",
-        setor:"Zeta",
-        risco:"Médio",
-        recursos:"Gelo Puro, Energia Geotérmica",
-        descricao:"Mundo gelado com oceanos subterrâneos e auroras permanentes."
-    },
-
-    {
-        id:9,
-        nome:"Draknor",
-        setor:"Sigma",
-        risco:"Alto",
-        recursos:"Ligas Metálicas Raras",
-        descricao:"Planeta vulcânico habitado por formas de vida extremófilas."
-    },
-
-    {
-        id:10,
-        nome:"Aurora Celestis",
-        setor:"Alpha",
-        risco:"Baixo",
-        recursos:"Flora Bioluminescente",
-        descricao:"Santuário natural conhecido pelos céus multicoloridos e clima ameno."
+        nome:"Verdejante",
+        setor:"Sistema solar tião",
+        risco:"Medio",
+        recursos:"???",
+        descricao:"Inimigos Perigosos"
     }
 
 ];
@@ -99,37 +18,15 @@ let listaMissoes = [
 
         id:1,
 
-        nome:"Exploração Alpha",
+        nome:"Restauração do Painel de Operações",
 
-        destino:"Marte",
-
-        status:"Ativa"
-
-    },
-
-    {
-
-        id:2,
-
-        nome:"Pesquisa Pandora",
-
-        destino:"Pandora",
+        destino:"Verdejante",
+        
+        Responsável: "Joaquim",
 
         status:"Em andamento"
 
     },
-
-    {
-
-        id:3,
-
-        nome:"Resgate Europa",
-
-        destino:"Europa",
-
-        status:"Concluída"
-
-    }
 
 ];
 
@@ -139,17 +36,17 @@ let gruposFrota = [
 
         id:1,
 
-        nome:"Orion",
+        nome:"Frota L",
 
         capitao:"Lucas",
 
         integrantes:[
 
-            "João",
+            "Lucas",
 
-            "Maria",
+            "Thiago",
 
-            "Pedro"
+            "GustavoS"
 
         ]
 
@@ -159,21 +56,47 @@ let gruposFrota = [
 
         id:2,
 
-        nome:"Nebula",
+        nome:"Frota V",
 
-        capitao:"Ana",
+        capitao:"Vinicios",
 
         integrantes:[
 
-            "Carlos",
+            "Vinicios",
 
-            "Fernanda",
+            "Sarah",
 
-            "Bruno"
+            "Igor",
+
+            "Gabriel"
+
+        ]
+
+    },
+
+     {
+
+        id:3,
+
+        nome:"Frota P",
+
+        capitao:"Pedro",
+
+        integrantes:[
+
+            "Pedro",
+
+            "Matheus",
+
+            "Erica",
+
+            "Henrique"
 
         ]
 
     }
+
+
 
 ];
 
@@ -182,14 +105,33 @@ let tripulantesLivres = [
 
     {
         id:1,
-        nome:"Renata"
+        nome:"Sophia"
     },
 
     {
         id:2,
-        nome:"Diego"
-    }
+        nome:"EduardaZ"
+    },
 
+    {
+        id:3,
+        nome:"Julia"
+    },
+
+    {
+        id:4,
+        nome:"Isabele"
+    },
+
+    {
+        id:5,
+        nome:"Marina"
+    },
+
+    {
+        id:6,
+        nome:"GustavoJ"
+    }
 ];
 
 
