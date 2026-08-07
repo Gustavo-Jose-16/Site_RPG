@@ -23,13 +23,33 @@ let listaMissoes = [
 
         destino:"Verdejante",
 
-        responsavel: "Joaquim",
+        responsavel: "Tiao",
 
         prioridade: "Alta",
 
         status:"Em andamento",
 
-        data: "2026-08-06",
+        data: "2026-08-07",
+
+        concluidoPor: ""
+
+    },
+
+        {
+
+        id:2,
+
+        nome:"Dividindo os Espólios",
+
+        destino:"Verdejante",
+
+        responsavel: "Tiao",
+
+        prioridade: "Alta",
+
+        status:"Em andamento",
+
+        data: "2026-08-09",
 
         concluidoPor: ""
 
